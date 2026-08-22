@@ -1,0 +1,70 @@
+{
+  "name": "deepseek-harness-dsh-vscode",
+  "displayName": "DeepSeek Harness Chat for VSCode",
+  "description": "Unofficial, community-built VS Code extension to run DeepSeek Harness coding agents inside the editor.",
+  "version": "0.0.1",
+  "icon": "media/whale-badge.png",
+  "publisher": "irsh",
+  "license": "MIT",
+  "engines": { "vscode": "^1.96.0" },
+  "categories": ["AI", "Other"],
+  "activationEvents": ["onStartupFinished"],
+  "main": "./dist/extension.js",
+  "repository": { "type": "git", "url": "https://github.com/1rsh/deepseek-harness-vscode.git" },
+  "bugs": { "url": "https://github.com/1rsh/deepseek-harness-vscode/issues" },
+  "homepage": "https://github.com/1rsh/deepseek-harness-vscode#readme",
+  "contributes": {
+    "commands": [
+      { "command": "deepseekHarness.newSession", "title": "DeepSeek Harness: New Session", "icon": "$(add)" },
+      { "command": "deepseekHarness.focusChat", "title": "DeepSeek Harness: Focus Chat" },
+      { "command": "deepseekHarness.addSelection", "title": "DeepSeek Harness: Add Selection to Chat" },
+      { "command": "deepseekHarness.addActiveFile", "title": "DeepSeek Harness: Add Active File to Chat" },
+      { "command": "deepseekHarness.cancelTurn", "title": "DeepSeek Harness: Cancel Turn", "icon": "$(debug-stop)" },
+      { "command": "deepseekHarness.restartRuntime", "title": "DeepSeek Harness: Restart Runtime" },
+      { "command": "deepseekHarness.openLogs", "title": "DeepSeek Harness: Open Logs" }
+    ],
+    "viewsContainers": {
+      "activitybar": [{ "id": "deepseekHarness", "title": "DeepSeek Harness", "icon": "media/icon.svg" }]
+    },
+    "views": {
+      "deepseekHarness": [{ "type": "webview", "id": "deepseekHarness.chat", "name": "Chat" }]
+    },
+    "viewsWelcome": [{ "view": "deepseekHarness.chat", "contents": "Open a folder to start a DeepSeek Harness session.\n[New Session](command:deepseekHarness.newSession)" }],
+    "menus": {
+      "view/title": [
+        { "command": "deepseekHarness.newSession", "when": "view == deepseekHarness.chat", "group": "navigation" },
+        { "command": "deepseekHarness.cancelTurn", "when": "view == deepseekHarness.chat && deepseekHarness.running", "group": "navigation" }
+      ],
+      "editor/context": [
+        { "command": "deepseekHarness.addSelection", "when": "editorHasSelection", "group": "navigation@99" }
+      ]
+    },
+    "configuration": {
+      "title": "DeepSeek Harness",
+      "properties": {
+        "deepseekHarness.web.url": { "type": "string", "default": "http://127.0.0.1:3080", "description": "DeepSeek Harness Web endpoint. An already-running server here is reused as-is; otherwise the extension auto-starts one here when deepseekHarness.autoStart is enabled." },
+        "deepseekHarness.autoStart": { "type": "boolean", "default": true, "description": "Automatically launch a local DSH Web server when none is reachable at deepseekHarness.web.url." },
+        "deepseekHarness.runtime.command": { "type": "string", "default": "", "description": "Command used to auto-start the DSH Web server. Leave empty to have the extension clone deepseek-harness into its global storage (installing/building it with pnpm on first use) and run it from there automatically. Set to \"pnpm\" to instead use your own checkout via deepseekHarness.runtime.cwd." },
+        "deepseekHarness.runtime.args": { "type": "array", "items": { "type": "string" }, "default": [], "description": "Arguments passed to deepseekHarness.runtime.command, overriding the automatic default. --host/--port are appended automatically from deepseekHarness.web.url." },
+        "deepseekHarness.runtime.cwd": { "type": "string", "default": "", "description": "Working directory for the auto-started server. Only used when runtime.command is \"pnpm\"; leave empty to use the extension's own managed clone." },
+        "deepseekHarness.submitOnEnter": { "type": "boolean", "default": true, "description": "Submit with Enter. When disabled, use Ctrl+Enter or Cmd+Enter." },
+        "deepseekHarness.permission": { "type": "string", "default": "workspace-write", "description": "Fallback permission shown before the selected session publishes its dynamic permission presets." }
+      }
+    }
+  },
+  "scripts": {
+    "build": "node esbuild.mjs",
+    "watch": "node esbuild.mjs --watch",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "package": "npm run build && vsce package --no-dependencies"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "@types/vscode": "^1.96.0",
+    "@vscode/vsce": "^3.2.2",
+    "esbuild": "^0.25.0",
+    "typescript": "^5.7.2",
+    "vitest": "^3.0.5"
+  }
+}
