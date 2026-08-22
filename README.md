@@ -5,7 +5,7 @@
 *Unofficial, community-built extension — not affiliated with or endorsed by DeepSeek.*
 
 <p align="center">
-  <a href="https://marketplace.visualstudio.com/items?itemName=irsh.deepseek-harness-dsh-vscode"><img src="https://img.shields.io/visual-studio-marketplace/v/irsh.deepseek-harness-dsh-vscode?label=Marketplace&color=7C3AED" alt="Marketplace version"></a>
+  <a href="https://marketplace.visualstudio.com/items?itemName=irsh.deepseek-harness-dsh-vscode"><img src="https://img.shields.io/visual-studio-marketplace/v/irsh.deepseek-harness-dsh-vscode?label=Marketplace&color=4D6BFE" alt="Marketplace version"></a>
 </p>
 
 Install from the Marketplace link above, or paste `vscode:extension/irsh.deepseek-harness-dsh-vscode` into your browser's address bar to open it directly in VS Code.
