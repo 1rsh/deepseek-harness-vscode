@@ -6,8 +6,9 @@
 
 <p align="center">
   <a href="https://marketplace.visualstudio.com/items?itemName=irsh.deepseek-harness-dsh-vscode"><img src="https://img.shields.io/visual-studio-marketplace/v/irsh.deepseek-harness-dsh-vscode?label=Marketplace&color=7C3AED" alt="Marketplace version"></a>
-  <a href="vscode:extension/irsh.deepseek-harness-dsh-vscode"><img src="https://img.shields.io/badge/VS%20Code-Open%20Extension-7C3AED?logo=visualstudiocode&logoColor=white" alt="Open in VS Code"></a>
 </p>
+
+Install from the Marketplace link above, or paste `vscode:extension/irsh.deepseek-harness-dsh-vscode` into your browser's address bar to open it directly in VS Code.
 
 Run a local [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness) coding-agent runtime from the VS Code Activity Bar.
 
